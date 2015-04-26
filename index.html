@@ -16,27 +16,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-7">
-                    <div id="catView"><img src="http://placehold.it/500x500" alt="Cat"></div>
+                    <div id="animalDetail"><img src="http://placehold.it/500x500" alt="Cat"></div>
                 </div>
                 <div class="col-lg-5">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <span class="badge">4</span>
-                            <a href="#">Furry</a>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge">5</span>
-                            <a href="#">Clawz</a>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge">2</span>
-                            <a href="#">Harry</a>
-                        </li>
-                    </ul>
+                    <ul class="list-group" id="animalList"></ul>
                 </div>
             </div>
         </div>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script id="animalListTemplate" type="text/x-js-template">
+                        <li class="list-group-item">
+                            <span class="badge">{{ counter }}</span>
+                            <a href="#">{{ name }}</a>
+                        </li>
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.2/handlebars.min.js"></script>
         <script src="/static/js/app.js"></script>
     </body>
 </html>
