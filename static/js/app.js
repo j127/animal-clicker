@@ -1,44 +1,36 @@
 // MVC experiments without jQuery or external libraries
 
 var model = {
-    getAllAnimals: function () {
-        var data = {};
-        data.animals = [
-            { 'id': 1, 'name': 'Harry', 'counter': 0, 'pictureUrl': '/static/images/1.jpg' },
-            { 'id': 2, 'name': 'Bob', 'counter': 0, 'pictureUrl': '/static/images/2.jpg' },
-            { 'id': 3, 'name': 'Bambi', 'counter': 0, 'pictureUrl': '/static/images/3.jpg' },
-            { 'id': 4, 'name': 'Clawz', 'counter': 0, 'pictureUrl': '/static/images/4.jpg' },
-            { 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
-        ];
-        return data;
-    },
-    getAnimalById: function (animalId) {
-        console.log('got animalId', animalId);
-        var result;
-        var query = this.getAllAnimals();
-        query.animals.filter(function (obj) {
-            if (obj.id === parseInt(animalId)) {
-                result = obj
-            }
-        });
-        return result;
-    }
+    animals: [
+        { 'id': 1, 'name': 'Harry', 'counter': 0, 'pictureUrl': '/static/images/1.jpg' },
+        { 'id': 2, 'name': 'Bob', 'counter': 0, 'pictureUrl': '/static/images/2.jpg' },
+        { 'id': 3, 'name': 'Bambi', 'counter': 0, 'pictureUrl': '/static/images/3.jpg' },
+        { 'id': 4, 'name': 'Clawz', 'counter': 0, 'pictureUrl': '/static/images/4.jpg' },
+        { 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
+    ],
+    currentAnimal: null
 };
 
 var controller = {
     init: function () {
+        // Initializes the application
+        model.currentAnimal = model.animals[0];
         animalListView.init();
         animalDetailView.init();
     },
     getAnimals: function () {
-        return model.getAllAnimals();
+        return model.animals;
     },
-    getAnimal: function (animalId) {
-        var animal = model.getAnimalById(animalId);
-        return animal;
+    getCurrentAnimal: function () {
+        return model.currentAnimal;
     },
-    incrementCounter: function (animalId) {
-        model.getAnimalById(animalId).id += 1;
+    setCurrentAnimal: function (animal) {
+        model.currentAnimal = animal;
+    },
+    incrementHandler: function () {
+        // Increases a given animal's click counter
+        model.currentAnimal.counter++;
+        animalListView.render();
     }
 };
 
@@ -50,24 +42,34 @@ var animalListView = {
     },
     render: function () {
         var outputHtml = '',
+            elem,
+            badge,
+            animal,
             animals,
             animalLinks,
             i, iLen;
 
-        animals = controller.getAnimals().animals;
-        animals.forEach(function (animal) {
-            outputHtml += '<li class="list-group-item"><span class="badge">' +
-                        animal.counter + '</span>' +
-                        '<a href="#" class="animalListLink" data-animal-id="' +
-                        animal.id + '">' +
-                        animal.name + '</a>' + '</li>';
-        });
         this.animalList.innerHTML = outputHtml;
         
+        animals = controller.getAnimals();
         // Add event handlers
         animalLinks = document.querySelectorAll('.animalListLink');
-        for (i = 0, iLen = animalLinks.length - 1; i <= iLen; i ++) {
-            animalLinks[i].addEventListener('click', this.clickHandler, false);
+        for (i = 0, iLen = animals.length - 1; i <= iLen; i ++) {
+            animal = animals[i];
+            elem = document.createElement('li');
+            elem.className = 'list-group-item';
+            elem.textContent = animal.name;
+            badge = document.createElement('span');
+            badge.textContent = animal.counter;
+            badge.className = 'badge';
+            elem.appendChild(badge);
+            elem.addEventListener('click', (function (animalCopy) {
+                return function() {
+                    controller.setCurrentAnimal(animalCopy);
+                    animalDetailView.render();
+                };
+            })(animal));
+            this.animalList.appendChild(elem);
         }
     },
     clickHandler: function (e) {
@@ -80,8 +82,7 @@ var animalListView = {
 var animalDetailView = {
     init: function () {
         this.animalDetail = document.querySelector('#animalDetail');
-        console.log('animalDetail', animalDetail);
-        //animalDetailView.render();
+        this.render();
     },
     render: function (animalId) {
         var outputHtml = '',
@@ -89,11 +90,11 @@ var animalDetailView = {
             animalPic,
             i, iLen;
 
-        animal = controller.getAnimal(animalId);
-        outputHtml += '<img id="animalPic" src="' +
+        animal = controller.getCurrentAnimal();
+        outputHtml += '<img id="animalPic"' + ' data-animal-id="' +
+                    animal.id + '" src="' +
                     animal.pictureUrl +
                     '" alt="' + animal.name + '">';
-        console.log(outputHtml);
         this.animalDetail.innerHTML = outputHtml;
 
         // Add event handler
@@ -102,9 +103,7 @@ var animalDetailView = {
     },
     clickHandler: function (e) {
         e.preventDefault();
-        var animalId = this.dataset.animalId;
-        var x = model.incrementCounter(animalId);
-        console.log(animalId, x);
+        controller.incrementHandler();
     }
 };
 
