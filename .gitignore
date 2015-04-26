@@ -1,0 +1,14 @@
+# Editors
+*~
+*.sw[po]
+
+# Python
+*.py[co]
+__pycache__/
+
+# Data
+*.sqlite3
+
+# Misc.
+tmp/
+*.bak
