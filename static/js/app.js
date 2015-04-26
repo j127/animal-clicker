@@ -11,15 +11,34 @@ var model = {
             { 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
         ];
         return data;
+    },
+    getAnimalById: function (animalId) {
+        console.log('got animalId', animalId);
+        var result;
+        var query = this.getAllAnimals();
+        query.animals.filter(function (obj) {
+            if (obj.id === parseInt(animalId)) {
+                result = obj
+            }
+        });
+        return result;
     }
 };
 
 var controller = {
     init: function () {
         animalListView.init();
+        animalDetailView.init();
     },
     getAnimals: function () {
         return model.getAllAnimals();
+    },
+    getAnimal: function (animalId) {
+        var animal = model.getAnimalById(animalId);
+        return animal;
+    },
+    incrementCounter: function (animalId) {
+        model.getAnimalById(animalId).id += 1;
     }
 };
 
@@ -44,6 +63,8 @@ var animalListView = {
                         animal.name + '</a>' + '</li>';
         });
         this.animalList.innerHTML = outputHtml;
+        
+        // Add event handlers
         animalLinks = document.querySelectorAll('.animalListLink');
         for (i = 0, iLen = animalLinks.length - 1; i <= iLen; i ++) {
             animalLinks[i].addEventListener('click', this.clickHandler, false);
@@ -52,34 +73,38 @@ var animalListView = {
     clickHandler: function (e) {
         e.preventDefault();
         var animalId = this.dataset.animalId;
-        console.log(animalId);
+        animalDetailView.render(animalId);
     }
 };
-
 
 var animalDetailView = {
     init: function () {
         this.animalDetail = document.querySelector('#animalDetail');
-        animalDetailView.render();
+        console.log('animalDetail', animalDetail);
+        //animalDetailView.render();
     },
-    render: function () {
+    render: function (animalId) {
         var outputHtml = '',
             animal,
+            animalPic,
             i, iLen;
 
-        outputHtml += '<img src="' +
+        animal = controller.getAnimal(animalId);
+        outputHtml += '<img id="animalPic" src="' +
                     animal.pictureUrl +
                     '" alt="' + animal.name + '">';
-        this.animalList.innerHTML = outputHtml;
-        animalLinks = document.querySelectorAll('.animalListLink');
-        for (i = 0, iLen = animalLinks.length - 1; i <= iLen; i ++) {
-            animalLinks[i].addEventListener('click', this.clickHandler, false);
-        }
+        console.log(outputHtml);
+        this.animalDetail.innerHTML = outputHtml;
+
+        // Add event handler
+        animalPic = document.querySelector('#animalPic');
+        animalPic.addEventListener('click', this.clickHandler, false);
     },
     clickHandler: function (e) {
         e.preventDefault();
         var animalId = this.dataset.animalId;
-        console.log(animalId);
+        var x = model.incrementCounter(animalId);
+        console.log(animalId, x);
     }
 };
 
