@@ -1,18 +1,14 @@
-// MVC experiments
+// MVC experiments without jQuery or external libraries
 
 var model = {
-    init: function () {
-        // TODO: create models and put them in localStorage
-        console.log('Initialize models');
-    },
     getAllAnimals: function () {
         var data = {};
         data.animals = [
-            { 'id': 1, 'name': 'Harry', 'counter': 0, 'picture': '/static/images/1.jpg' },
-            { 'id': 2, 'name': 'Bob', 'counter': 0, 'picture': '/static/images/2.jpg' },
-            { 'id': 3, 'name': 'Bambi', 'counter': 0, 'picture': '/static/images/3.jpg' },
-            { 'id': 4, 'name': 'Clawz', 'counter': 0, 'picture': '/static/images/4.jpg' },
-            { 'id': 5, 'name': 'Curly', 'counter': 0, 'picture': '/static/images/5.jpg' }
+            { 'id': 1, 'name': 'Harry', 'counter': 0, 'pictureUrl': '/static/images/1.jpg' },
+            { 'id': 2, 'name': 'Bob', 'counter': 0, 'pictureUrl': '/static/images/2.jpg' },
+            { 'id': 3, 'name': 'Bambi', 'counter': 0, 'pictureUrl': '/static/images/3.jpg' },
+            { 'id': 4, 'name': 'Clawz', 'counter': 0, 'pictureUrl': '/static/images/4.jpg' },
+            { 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
         ];
         return data;
     }
@@ -20,7 +16,6 @@ var model = {
 
 var controller = {
     init: function () {
-        model.init();
         animalListView.init();
     },
     getAnimals: function () {
@@ -28,10 +23,10 @@ var controller = {
     }
 };
 
-// TODO: use a view Class
+// TODO: use a View class and create two instances
 var animalListView = {
     init: function () {
-        this.animalList = $('#animalList');
+        this.animalList = document.querySelector('#animalList');
         animalListView.render();
     },
     render: function () {
@@ -48,7 +43,7 @@ var animalListView = {
                         animal.id + '">' +
                         animal.name + '</a>' + '</li>';
         });
-        this.animalList.html(outputHtml);
+        this.animalList.innerHTML = outputHtml;
         animalLinks = document.querySelectorAll('.animalListLink');
         for (i = 0, iLen = animalLinks.length - 1; i <= iLen; i ++) {
             animalLinks[i].addEventListener('click', this.clickHandler, false);
@@ -62,7 +57,31 @@ var animalListView = {
 };
 
 
-var animalDetailView = {};
+var animalDetailView = {
+    init: function () {
+        this.animalDetail = document.querySelector('#animalDetail');
+        animalDetailView.render();
+    },
+    render: function () {
+        var outputHtml = '',
+            animal,
+            i, iLen;
+
+        outputHtml += '<img src="' +
+                    animal.pictureUrl +
+                    '" alt="' + animal.name + '">';
+        this.animalList.innerHTML = outputHtml;
+        animalLinks = document.querySelectorAll('.animalListLink');
+        for (i = 0, iLen = animalLinks.length - 1; i <= iLen; i ++) {
+            animalLinks[i].addEventListener('click', this.clickHandler, false);
+        }
+    },
+    clickHandler: function (e) {
+        e.preventDefault();
+        var animalId = this.dataset.animalId;
+        console.log(animalId);
+    }
+};
 
 // Start the app
 controller.init();
