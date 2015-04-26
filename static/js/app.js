@@ -2,11 +2,11 @@
 
 var model = {
     animals: [
-        { 'id': 1, 'name': 'Harry', 'counter': 0, 'pictureUrl': '/static/images/1.jpg' },
-        { 'id': 2, 'name': 'Bob', 'counter': 0, 'pictureUrl': '/static/images/2.jpg' },
-        { 'id': 3, 'name': 'Bambi', 'counter': 0, 'pictureUrl': '/static/images/3.jpg' },
-        { 'id': 4, 'name': 'Clawz', 'counter': 0, 'pictureUrl': '/static/images/4.jpg' },
-        { 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
+        { 'id': 1, 'name': 'Harry', 'counter': 0, 'pictureUrl': '/animal-clicker/static/images/1.jpg' },
+        { 'id': 2, 'name': 'Bob', 'counter': 0, 'pictureUrl': '/animal-clicker/static/images/2.jpg' },
+        { 'id': 3, 'name': 'Bambi', 'counter': 0, 'pictureUrl': '/animal-clicker/static/images/3.jpg' },
+        { 'id': 4, 'name': 'Clawz', 'counter': 0, 'pictureUrl': '/animal-clicker/static/images/4.jpg' },
+        { 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/animal-clicker/static/images/5.jpg' }
     ],
     currentAnimal: null
 };
