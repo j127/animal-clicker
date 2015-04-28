@@ -11,6 +11,7 @@
 var ViewModel = function () {
     this.clickCount = ko.observable(0);
     this.name = ko.observable('Harry');
+    this.nicknames = ko.observableArray(['Fufu', 'Fluffy', 'Furball', 'Fireball']);
     this.imgSrc = ko.observable('static/images/1.jpg');
 
     this.incrementCounter = function () {

@@ -22,8 +22,14 @@
                         <ul class="nav nav-pills">
                             <li class="active"><a><span data-bind="text: level"></span> <span class="badge" data-bind="text: clickCount"></span></a></li>
                         </ul>
-                        <br>
-                        <img data-bind="attr: { src: imgSrc }, click: incrementCounter">
+                        <div>
+                            <img data-bind="attr: { src: imgSrc }, click: incrementCounter">
+                        </div>
+                        <div>
+                            <ul data-bind="foreach: nicknames">
+                                <li data-bind="text: $data"></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
