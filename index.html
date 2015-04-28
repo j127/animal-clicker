@@ -18,10 +18,16 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div id="animalDetail" data-bind="with: currentAnimal">
-                        <h2 data-bind="text: name"></h2>
-                        <ul class="nav nav-pills">
-                            <li class="active"><a><span data-bind="text: level"></span> <span class="badge" data-bind="text: clickCount"></span></a></li>
-                        </ul>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h2 data-bind="text: name"></h2>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul id="animalList" class="nav nav-pills">
+                                    <li class="active"><a><span data-bind="text: level"></span> <span class="badge" data-bind="text: clickCount"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
                         <div>
                             <img data-bind="attr: { src: imgSrc }, click: $parent.incrementCounter">
                         </div>
