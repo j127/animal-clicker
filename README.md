@@ -1,3 +1,5 @@
+Knockout.js version.
+
 Images used under Creative Commons license. Please see the pages below:
 
 * http://commons.wikimedia.org/wiki/File:Fawn-in-grass.jpg  
