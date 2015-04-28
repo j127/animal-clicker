@@ -1,18 +1,18 @@
 // Knockout.js version
 
-//animals: [
-    //{ 'id': 1, 'name': 'Harry', 'counter': 0, 'pictureUrl': '/static/images/1.jpg' },
-    //{ 'id': 2, 'name': 'Bob', 'counter': 0, 'pictureUrl': '/static/images/2.jpg' },
-    //{ 'id': 3, 'name': 'Bambi', 'counter': 0, 'pictureUrl': '/static/images/3.jpg' },
-    //{ 'id': 4, 'name': 'Clawz', 'counter': 0, 'pictureUrl': '/static/images/4.jpg' },
-    //{ 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
-//]
+initialAnimals = [
+    { 'clickCount': 0, 'name': 'Harry', 'nicknames': ['Fufu', 'Fluffy', 'Furball', 'Fireball'], 'imgSrc': '/static/images/1.jpg' },
+    { 'clickCount': 0, 'name': 'Bob', 'nicknames': ['Panther', 'Tiger'], 'imgSrc': '/static/images/2.jpg' },
+    { 'clickCount': 0, 'name': 'Bambi', 'nicknames': ['Cutie'], 'imgSrc': '/static/images/3.jpg' },
+    { 'clickCount': 0, 'name': 'Clawz', 'nicknames': ['Happy', 'Scratchy'], 'imgSrc': '/static/images/4.jpg' },
+    { 'clickCount': 0, 'name': 'Curly', 'nicknames': ['Baa', 'Jumper'], 'imgSrc': '/static/images/5.jpg' }
+];
 
-var Animal = function () {
-    this.clickCount = ko.observable(0);
-    this.name = ko.observable('Harry');
-    this.nicknames = ko.observableArray(['Fufu', 'Fluffy', 'Furball', 'Fireball']);
-    this.imgSrc = ko.observable('static/images/1.jpg');
+var Animal = function (data) {
+    this.clickCount = ko.observable(data.clickCount);
+    this.name = ko.observable(data.name);
+    this.nicknames = ko.observableArray(data.nicknames);
+    this.imgSrc = ko.observable(data.imgSrc);
 
     this.level = ko.computed(function () {
         if (this.clickCount() >= 0 && this.clickCount() < 10) {
@@ -28,10 +28,20 @@ var Animal = function () {
 };
 
 var ViewModel = function () {
-    this.currentAnimal = ko.observable(new Animal());
+    var self = this;
+
+    this.animalList = ko.observableArray([]);
+    initialAnimals.forEach(function (animal) {
+        self.animalList.push(new Animal(animal));
+    });
+
+    this.currentAnimal = ko.observable(this.animalList()[0]);
 
     this.incrementCounter = function () {
-        this.currentAnimal().clickCount(this.currentAnimal().clickCount() + 1);
+        this.clickCount(this.clickCount() + 1);
+    };
+    this.changeCurrentAnimal = function (animal) {
+        self.currentAnimal(animal);
     };
 };
 
