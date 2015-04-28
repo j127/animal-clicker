@@ -8,15 +8,12 @@
     //{ 'id': 5, 'name': 'Curly', 'counter': 0, 'pictureUrl': '/static/images/5.jpg' }
 //]
 
-var ViewModel = function () {
+var Animal = function () {
     this.clickCount = ko.observable(0);
     this.name = ko.observable('Harry');
     this.nicknames = ko.observableArray(['Fufu', 'Fluffy', 'Furball', 'Fireball']);
     this.imgSrc = ko.observable('static/images/1.jpg');
 
-    this.incrementCounter = function () {
-        this.clickCount(this.clickCount() + 1);
-    };
     this.level = ko.computed(function () {
         if (this.clickCount() >= 0 && this.clickCount() < 10) {
             return 'Baby';
@@ -28,6 +25,14 @@ var ViewModel = function () {
             return 'Senior';
         }
     }, this);
+};
+
+var ViewModel = function () {
+    this.currentAnimal = ko.observable(new Animal());
+
+    this.incrementCounter = function () {
+        this.currentAnimal().clickCount(this.currentAnimal().clickCount() + 1);
+    };
 };
 
 ko.applyBindings(new ViewModel());
