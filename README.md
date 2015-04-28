@@ -1,4 +1,4 @@
-Knockout.js version.
+Knockout.js version with Browserify.
 
 Images used under Creative Commons license. Please see the pages below:
 
