@@ -16,6 +16,18 @@ var ViewModel = function () {
     this.incrementCounter = function () {
         this.clickCount(this.clickCount() + 1);
     };
-}
+    this.level = ko.computed(function () {
+        console.log(this.clickCount());
+        if (this.clickCount() >= 0 && this.clickCount() < 10) {
+            return 'Baby';
+        } else if (this.clickCount() >= 10 && this.clickCount() < 15) {
+            return 'Kitten';
+        } else if (this.clickCount() >= 15 && this.clickCount() < 25) {
+            return 'Adult';
+        } else {
+            return 'Cat god';
+        }
+    }, this);
+};
 
 ko.applyBindings(new ViewModel());
