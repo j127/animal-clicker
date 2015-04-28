@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-lg-5">
                     <ul class="list-group" id="animalList" data-bind="foreach: animalList()">
-                        <li class="list-group-item" data-bind="click: $parent.changeCurrentAnimal"><span data-bind="text: name"></span> <span data-bind="text: level" class="badge"></span></li>
+                        <li class="list-group-item" data-bind="click: $parent.changeCurrentAnimal"><span data-bind="text: name"></span> <span class="badge"><span data-bind="text: level"></span> (<span data-bind="text: clickCount"></span>)</span></li>
                     </ul>
                     <div>
                         <h2>Nicknames</h2>
