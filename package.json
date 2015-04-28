@@ -1,0 +1,28 @@
+{
+  "name": "animal-clicker",
+  "version": "1.0.0",
+  "description": "JS Design Patterns Tutorial",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/j127/AnimalClicker.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/j127/AnimalClicker/issues"
+  },
+  "homepage": "https://github.com/j127/AnimalClicker",
+  "dependencies": {
+    "browserify": "^9.0.8",
+    "gulp": "^3.8.11",
+    "gulp-changed": "^1.2.1",
+    "gulp-uglify": "^1.2.0",
+    "knockout": "^3.3.0",
+    "uglify": "^0.1.3",
+    "vinyl-transform": "^1.0.0",
+    "xhr": "^2.0.1"
+  }
+}
