@@ -10,22 +10,21 @@
 
 var ViewModel = function () {
     this.clickCount = ko.observable(0);
-    this.name = ko.observable('Furry');
+    this.name = ko.observable('Harry');
     this.imgSrc = ko.observable('static/images/1.jpg');
 
     this.incrementCounter = function () {
         this.clickCount(this.clickCount() + 1);
     };
     this.level = ko.computed(function () {
-        console.log(this.clickCount());
         if (this.clickCount() >= 0 && this.clickCount() < 10) {
             return 'Baby';
         } else if (this.clickCount() >= 10 && this.clickCount() < 15) {
-            return 'Kitten';
+            return 'Neophyte';
         } else if (this.clickCount() >= 15 && this.clickCount() < 25) {
             return 'Adult';
         } else {
-            return 'Cat god';
+            return 'Senior';
         }
     }, this);
 };
