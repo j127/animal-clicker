@@ -1,11 +1,11 @@
 // Knockout.js version
 
 initialAnimals = [
-    { 'clickCount': 0, 'name': 'Harry', 'nicknames': ['Fufu', 'Fluffy', 'Furball', 'Fireball'], 'imgSrc': '/static/images/1.jpg' },
-    { 'clickCount': 0, 'name': 'Bob', 'nicknames': ['Panther', 'Tiger'], 'imgSrc': '/static/images/2.jpg' },
-    { 'clickCount': 0, 'name': 'Bambi', 'nicknames': ['Cutie'], 'imgSrc': '/static/images/3.jpg' },
-    { 'clickCount': 0, 'name': 'Clawz', 'nicknames': ['Happy', 'Scratchy'], 'imgSrc': '/static/images/4.jpg' },
-    { 'clickCount': 0, 'name': 'Curly', 'nicknames': ['Baa', 'Jumper'], 'imgSrc': '/static/images/5.jpg' }
+    { 'clickCount': 0, 'name': 'Harry', 'nicknames': ['Fufu', 'Fluffy', 'Furball', 'Fireball'], 'imgSrc': 'static/images/1.jpg' },
+    { 'clickCount': 0, 'name': 'Bob', 'nicknames': ['Panther', 'Tiger'], 'imgSrc': 'static/images/2.jpg' },
+    { 'clickCount': 0, 'name': 'Bambi', 'nicknames': ['Cutie'], 'imgSrc': 'static/images/3.jpg' },
+    { 'clickCount': 0, 'name': 'Clawz', 'nicknames': ['Happy', 'Scratchy'], 'imgSrc': 'static/images/4.jpg' },
+    { 'clickCount': 0, 'name': 'Curly', 'nicknames': ['Baa', 'Jumper'], 'imgSrc': 'static/images/5.jpg' }
 ];
 
 var Animal = function (data) {
